@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function kategori()
     {
-        return view('dashboard');
+        return view('kategori');
+    }
+    public function menu()
+    {
+        return view('menu');
     }
 }
