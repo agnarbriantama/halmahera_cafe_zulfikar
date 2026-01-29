@@ -319,7 +319,9 @@
               </ul>
             </li>            
             <li class="menu-header">Kasir</li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Halaman Kasir</span></a></li>
+            <li class="{{ Request::routeIs('kasir') ? 'active' : '' }}">
+              <a class="nav-link" href="{{route('kasir')}}"><i class="fas fa-pencil-ruler"></i> <span>Halaman Kasir</span></a>
+            </li>
             <li class="menu-header">Logout</li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Logout</span></a></li>
           </ul>
