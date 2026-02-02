@@ -369,7 +369,7 @@
     <div class="container-fluid shop py-5">
         <div class="container py-5">
             <div class="row g-4">
-                <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
+                <!-- <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="product-categories mb-4">
                         <h4>Products Categories</h4>
                         <ul class="list-unstyled">
@@ -466,7 +466,7 @@
                             <label for="Categories-5" class="text-dark"> SmartPhone & Smart TV</label>
                         </div>
                     </div>
-                    <!-- <div class="featured-product mb-4">
+                    <div class="featured-product mb-4">
                         <h4 class="mb-3">Featured products</h4>
                         <div class="featured-product-item">
                             <div class="rounded me-4" style="width: 100px; height: 100px;">
@@ -528,8 +528,8 @@
                         <div class="d-flex justify-content-center my-4">
                             <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">Vew More</a>
                         </div>
-                    </div> -->
-                    <!-- <a href="#">
+                    </div>
+                    <a href="#">
                         <div class="position-relative">
                             <img src="{{asset('electro/img/product-banner-2.jpg')}}" class="img-fluid w-100 rounded" alt="Image">
                             <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
@@ -539,8 +539,8 @@
                                 <a href="#" class="btn btn-primary rounded-pill px-4">Shop Now</a>
                             </div>
                         </div>
-                    </a> -->
-                    <!-- <div class="product-tags py-4">
+                    </a>
+                    <div class="product-tags py-4">
                         <h4 class="mb-3">PRODUCT TAGS</h4>
                         <div class="product-tags-items bg-light rounded p-3">
                             <a href="#" class="border rounded py-1 px-2 mb-2">New</a>
@@ -554,9 +554,9 @@
                             <a href="#" class="border rounded py-1 px-2 mb-2">talevision</a>
                             <a href="#" class="border rounded py-1 px-2 mb-2">slaes</a>
                         </div>
-                    </div> -->
-                </div>
-                <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">
+                    </div>
+                </div> -->
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                     <!-- <div class="rounded mb-4 position-relative">
                         <img src="{{asset('electro/img/product-banner-3.jpg')}}" class="img-fluid rounded w-100" style="height: 250px;"
                             alt="Image">

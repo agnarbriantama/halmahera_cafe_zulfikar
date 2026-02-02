@@ -280,37 +280,29 @@
             <li class="{{ Request::routeIs('kategori') ? 'active' : '' }}">
               <a href="{{route('kategori')}}" class="nav-link"><i class="fas fa-th-large"></i> <span>Kategori Menu</span></a>
             </li>
-            <li>
-              <a href="#" class="nav-link"><i class="far fa-file-alt"></i> <span>Daftar Menu</span></a>
-            </li>
-            <li>
-              <a href="#" class="nav-link"><i class="fas fa-map-marker-alt"></i> <span>Resep Menu</span></a>
-            </li>            
+            <li class="{{ Request::routeIs('menu') ? 'active' : '' }}">
+              <a href="{{route('menu')}}" class="nav-link"><i class="far fa-file-alt"></i> <span>Daftar Menu</span></a>
+            </li>              
             <li class="menu-header">Keuangan</li>
-            <li class="dropdown">
+            <li class="dropdown {{ Request::routeIs('harian', 'mingguan', 'bulanan') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Laporan Keuangan</span></a>
               <ul class="dropdown-menu">
-                <li><a href="auth-forgot-password.html">Harian</a></li> 
-                <li><a href="auth-login.html">Mingguan</a></li> 
-                <li><a href="auth-register.html">Bulanan</a></li> 
+                <li class="{{ Request::routeIs('harian') ? 'active' : '' }}"><a href="{{route('harian')}}">Harian</a></li> 
+                <li class="{{ Request::routeIs('mingguan') ? 'active' : '' }}"><a href="{{route('mingguan')}}">Mingguan</a></li> 
+                <li class="{{ Request::routeIs('bulanan') ? 'active' : '' }}"><a href="{{route('bulanan')}}">Bulanan</a></li> 
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown {{ Request::routeIs('pengeluaran_bahan', 'pengeluaran_gaji', 'pengeluaran_operasional') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-exclamation"></i> <span>Pengeluaran</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="errors-503.html">Bahan</a></li> 
-                <li><a class="nav-link" href="errors-403.html">Gaji</a></li> 
-                <li><a class="nav-link" href="errors-404.html">Operasional</a></li> 
+                <li><a class="{{ Request::routeIs('pengeluaran_bahan') ? 'active' : '' }}" href="{{route('pengeluaran_bahan')}}">Bahan</a></li> 
+                <li><a class="{{ Request::routeIs('pengeluaran_gaji') ? 'active' : '' }}" href="{{route('pengeluaran_gaji')}}">Gaji</a></li> 
+                <li><a class="{{ Request::routeIs('pengeluaran_operasional') ? 'active' : '' }}" href="{{route('pengeluaran_operasional')}}">Operasional</a></li> 
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown"><i class="fas fa-bicycle"></i> <span>Laba Rugi</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="features-activities.html">Pemasukan</a></li>
-                <li><a class="nav-link" href="features-post-create.html">Pengeluaran</a></li>
-                <li><a class="nav-link" href="features-posts.html">Profit</a></li>
-              </ul>
-            </li>
+            <li class="{{ Request::routeIs('laba_rugi') ? 'active' : '' }}">
+              <a href="{{route('laba_rugi')}}" class="nav-link"><i class="far fa-file-alt"></i> <span>Laba Rugi</span></a>
+            </li>  
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-ellipsis-h"></i> <span>Arus Kas</span></a>
               <ul class="dropdown-menu">

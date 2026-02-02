@@ -12,9 +12,12 @@
   <script src="{{asset('stisla/dist/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/jquery-ui/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
   <script src="{{asset('stisla/dist/assets/js/page/modules-datatables.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/forms-advanced-forms.js')}}"></script>
   
   <!-- Template JS File -->
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
