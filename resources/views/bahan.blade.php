@@ -24,7 +24,7 @@
                   </div>
                   <div class="card-body">
                     <div class="mb-3">
-                      <a href="" class="btn btn-success">Tambah Nama Bahan</a>
+                      <button href="" class="btn btn-success" data-toggle="modal" data-target="#tambahModal">Tambah</button>
                     </div>
                     <div class="table-responsive">
                       <table class="table table-striped" id="table-1">
@@ -48,8 +48,8 @@
                             <td>Gram</td>
                             <td>20</td>
                             <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
+                              <a href="#" type="button" data-toggle="modal" data-target="#editModal" class="btn btn-warning">Edit</a>
+                              <a href="#" type="button" class="btn btn-danger" id="hapus-bahan">Hapus</a>
                             </td>
                           </tr>
                           <tr>
@@ -84,5 +84,96 @@
               </div>
             </div>
           </div>
+          
         </section>
+          <div class="modal fade" tabindex="-1" role="dialog" id="tambahModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Tambah Bahan</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation" novalidate="">
+                    <div class="form-group">
+                      <label>Nama Bahan</label>
+                      <input type="text" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nama bahan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Satuan</label>
+                      <select class="custom-select">
+                          <option value="1">Kilogram</option>
+                          <option value="2">Ons</option>
+                          <option value="3">Gram</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Satuan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Minimal Stok</label>
+                      <input type="number" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Minimal Stok tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Edit Bahan</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation" novalidate="">
+                    <div class="form-group">
+                      <label>Nama Bahan</label>
+                      <input type="text" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nama bahan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Satuan</label>
+                      <select class="custom-select">
+                          <option value="1">Kilogram</option>
+                          <option value="2">Ons</option>
+                          <option value="3">Gram</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Satuan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Minimal Stok</label>
+                      <input type="number" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Minimal Stok tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 @endsection

@@ -24,7 +24,7 @@
                   </div>
                   <div class="card-body">
                     <div class="mb-3">
-                      <a href="" class="btn btn-success">Tambah Supplier</a>
+                      <button href="" class="btn btn-success" data-toggle="modal" data-target="#tambahSuplier">Tambah Supplier</button>
                     </div>
                     <div class="table-responsive">
                       <table class="table table-striped" id="table-1">
@@ -46,8 +46,8 @@
                             <td>Roni</td>
                             <td>0819675649877</td>
                             <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
+                              <a href="#" type="button" data-toggle="modal" data-target="#editSuplier" class="btn btn-warning">Edit</a>
+                              <a href="#" type="button" id="hapus-suplier" class="btn btn-danger">Hapus</a>
                             </td>
                           </tr>
                           <tr>
@@ -70,4 +70,72 @@
             </div>
           </div>
         </section>
+          <div class="modal fade" tabindex="-1" role="dialog" id="tambahSuplier">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Tambah Suplier</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation" novalidate="">
+                    <div class="form-group">
+                      <label>Nama Suplier</label>
+                      <input type="text" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nama suplier tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Nomer Handphone</label>
+                      <input type="number" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nomer Handphone tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" tabindex="-1" role="dialog" id="editSuplier">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Edit Suplier</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation" novalidate="">
+                    <div class="form-group">
+                      <label>Nama Suplier</label>
+                      <input type="text" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nama suplier tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Nomer Handphone</label>
+                      <input type="text" class="form-control" required="">
+                      <div class="invalid-feedback">
+                        Nomer handphone tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 @endsection

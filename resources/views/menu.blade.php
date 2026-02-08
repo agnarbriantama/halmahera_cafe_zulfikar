@@ -48,9 +48,9 @@
                             <td>Rp. 20.000</td>
                             <td>Hot Coffe</td>
                             <td>
-                              <a href="#" class="btn btn-primary">Detail Resep</a>
+                              <a href="#" type="button" data-toggle="modal" data-target="#detailResep" class="btn btn-primary">Detail Resep</a>
                               <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
+                              <a href="#" type="button" id="hapus-menu" class="btn btn-danger">Hapus</a>
                             </td>
                           </tr>
                           <tr>
@@ -88,4 +88,23 @@
             </div>
           </div>
         </section>
+          <div class="modal fade" tabindex="-1" role="dialog" id="detailResep">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Detail Resep</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button class="btn btn-primary">Simpan</button>
+                </div>
+              </div>
+            </div>
+          </div>
 @endsection

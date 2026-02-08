@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/select2/dist/css/select2.min.css')}}">
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jquery-selectric/selectric.css')}}">
+  <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/prism/prism.css')}}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/style.css')}}">
