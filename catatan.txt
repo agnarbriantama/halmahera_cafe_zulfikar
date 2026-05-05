@@ -1,0 +1,7 @@
+@if ($item->jumlah_stok <= $item->minimal_stok)
+    <span class="text-danger">
+        {{ $item->jumlah_stok }} {{ $item->satuan }} (Stok Menipis)
+    </span>
+@else
+    {{ $item->jumlah_stok }} {{ $item->satuan }}
+@endif

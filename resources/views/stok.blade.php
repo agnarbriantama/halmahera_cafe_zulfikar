@@ -37,46 +37,30 @@
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody>
+                          @foreach ($data as $index => $item)                                 
                           <tr>
                             <td>
-                              1
+                              {{ $index + 1 }}
                             </td>
-                            <td>Bubuk kopi</td>
-                            <td>Gram</td>
-                            <td>20</td>
-                            <td>200</td>
+                            <td>{{ $item->nama_bahan }}</td>
+                            <td>{{ $item->satuan }}</td>
+                            <td>{{ $item->minimal_stok }}</td>
+                            <td>
+                              @if ($item->jumlah_stok <= $item->minimal_stok)
+                                  <span class="text-danger">
+                                      {{ $item->jumlah_stok }} {{ $item->satuan }} (Stok Menipis)
+                                  </span>
+                              @else
+                                  {{ $item->jumlah_stok }} {{ $item->satuan }}
+                              @endif
+                            </td>
                             <td>
                               <a href="#" class="btn btn-info">Tambah Stok</a>
                               <a href="#" class="btn btn-primary">Pengurangan Stok</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>Gula</td>
-                            <td>Gram</td>
-                            <td>100</td>
-                            <td>500</td>
-                            <td>
-                              <a href="#" class="btn btn-info">Tambah Stok</a>
-                              <a href="#" class="btn btn-primary">Pengurangan Stok</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              3
-                            </td>
-                            <td>Jahe</td>
-                            <td>Ons</td>
-                            <td>50</td>
-                            <td>120</td>
-                            <td>
-                              <a href="#" class="btn btn-info">Tambah Stok</a>
-                              <a href="#" class="btn btn-primary">Pengurangan Stok</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

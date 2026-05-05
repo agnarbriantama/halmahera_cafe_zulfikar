@@ -38,29 +38,27 @@
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody>  
+                          @foreach ($data as $index => $item)                                 
                           <tr>
                             <td>
-                              1
+                               {{ $index + 1 }}
                             </td>
-                            <td>Roni</td>
-                            <td>0819675649877</td>
+                            <td>{{ $item->nama_supplier }}</td>
+                            <td>{{ $item->nomor_hp }}</td>
                             <td>
-                              <a href="#" type="button" data-toggle="modal" data-target="#editSuplier" class="btn btn-warning">Edit</a>
-                              <a href="#" type="button" id="hapus-suplier" class="btn btn-danger">Hapus</a>
+                              <a type="button" 
+                                 data-toggle="modal" 
+                                 data-target="#editSuplier" 
+                                 class="btn btn-warning btn-edit-supplier text-white"
+                                 data-id="{{ $item->id }}"
+                                 data-nama="{{ $item->nama_supplier }}"
+                                 data-nomor="{{ $item->nomor_hp }}"
+                                 >Edit</a>
+                              <a href="#" type="button" class="btn btn-danger btn-hapus-supplier" data-id="{{ $item->id }}" id="hapus-supplier">Hapus</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>Noval sawit</td>
-                            <td>089654789333</td>
-                            <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -80,17 +78,18 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="needs-validation" novalidate="">
+                  <form action="{{ route('supplier.create') }}" method="POST" class="needs-validation" novalidate>
+                    @csrf
                     <div class="form-group">
                       <label>Nama Suplier</label>
-                      <input type="text" class="form-control" required="">
+                      <input type="text" class="form-control" name="nama_supplier" required>
                       <div class="invalid-feedback">
                         Nama suplier tidak boleh kosong
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Nomer Handphone</label>
-                      <input type="number" class="form-control" required="">
+                      <input type="number" class="form-control" name="nomor_hp" required>
                       <div class="invalid-feedback">
                         Nomer Handphone tidak boleh kosong
                       </div>
@@ -98,7 +97,7 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
                 </div>
               </div>
@@ -114,17 +113,19 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="needs-validation" novalidate="">
+                  <form method="POST" id="editForm" class="needs-validation" novalidate>
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                       <label>Nama Suplier</label>
-                      <input type="text" class="form-control" required="">
+                      <input type="text" class="form-control" name="nama_supplier" id="edit_nama" required>
                       <div class="invalid-feedback">
                         Nama suplier tidak boleh kosong
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Nomer Handphone</label>
-                      <input type="text" class="form-control" required="">
+                      <input type="text" class="form-control" name="nomor_hp" id="edit_nomor" required>
                       <div class="invalid-feedback">
                         Nomer handphone tidak boleh kosong
                       </div>
@@ -132,10 +133,17 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
+          <form id="form-hapus" method="POST" style="display:none;">
+              @csrf
+              @method('DELETE')
+          </form>
+          @if(session('success'))
+            <div id="flash-success" data-message="{{ session('success') }}"></div>
+          @endif
 @endsection

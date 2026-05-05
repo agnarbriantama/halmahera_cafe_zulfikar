@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\StokBahanController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MenuController;
 
 /*
@@ -27,8 +28,17 @@ Route::get('/', [LoginController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/stok-bahan', [StokBahanController::class, 'index'])->name('bahan');
+Route::post('/stok-bahan', [StokBahanController::class, 'store'])->name('bahan.store');
+Route::put('/stok-bahan/{id}', [StokBahanController::class, 'update'])->name('bahan.update');
+Route::delete('/stok-bahan/{id}', [StokBahanController::class, 'destroy'])->name('bahan.destroy');
+
 Route::get('/stok', [StokBahanController::class, 'stok_bahan'])->name('stok');
-Route::get('/supplier', [StokBahanController::class, 'supplier'])->name('supplier');
+
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+Route::post('/supplier', [SupplierController::class, 'create'])->name('supplier.create');
+Route::put('/supplier/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+
 Route::get('/history-stok', [StokBahanController::class, 'history'])->name('history');
 
 Route::get('/kategori-menu', [MenuController::class, 'kategori'])->name('kategori');
