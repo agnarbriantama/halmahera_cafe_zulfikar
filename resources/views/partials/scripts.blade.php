@@ -84,6 +84,46 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('.btn-edit-gaji');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nama = this.dataset.nama;
+                const nominal = this.dataset.nominal;
+
+                document.getElementById('edit_nama').value = nama;
+                document.getElementById('edit_nominal').value = nominal;
+
+                // set action form
+                document.getElementById('editForm').action = `/pengeluaran-gaji/${id}`;
+            });
+        });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('.btn-edit-operasional');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nama = this.dataset.nama;
+                const nominal = this.dataset.nominal;
+
+                document.getElementById('edit_nama').value = nama;
+                document.getElementById('edit_nominal').value = nominal;
+
+                // set action form
+                document.getElementById('editForm').action = `/pengeluaran-operasional/${id}`;
+            });
+        });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll('.btn-hapus');
 
     buttons.forEach(btn => {
@@ -141,6 +181,70 @@
 
                     } else {
                         swal('Data supplier tidak jadi terhapus!');
+                    }
+                });
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.btn-hapus-gaji');
+
+    buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.dataset.id;
+
+                swal({
+                    title: 'Kamu yakin?',
+                    text: 'Menghapus data gaji maka data tidak bisa di pulihkan kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+
+                        // set action form
+                        const form = document.getElementById('form-hapus');
+                        form.action = `/pengeluaran-gaji/${id}`;
+
+                        form.submit(); // 🔥 kirim ke Laravel
+
+                    } else {
+                        swal('Data gaji tidak jadi terhapus!');
+                    }
+                });
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.btn-hapus-operasional');
+
+    buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.dataset.id;
+
+                swal({
+                    title: 'Kamu yakin?',
+                    text: 'Menghapus data operasional maka data tidak bisa di pulihkan kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+
+                        // set action form
+                        const form = document.getElementById('form-hapus');
+                        form.action = `/pengeluaran-operasional/${id}`;
+
+                        form.submit(); // 🔥 kirim ke Laravel
+
+                    } else {
+                        swal('Data operasional tidak jadi terhapus!');
                     }
                 });
             });

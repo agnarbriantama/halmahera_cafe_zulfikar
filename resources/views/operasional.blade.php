@@ -24,7 +24,7 @@
                   </div>
                   <div class="card-body">
                     <div class="mb-3">
-                      <a href="" class="btn btn-success">Tambah</a>
+                      <a href="" class="btn btn-success" data-toggle="modal" data-target="#tambahModal">Tambah</a>
                     </div>
                     <div class="table-responsive">
                       <table class="table table-striped" id="table-1">
@@ -39,31 +39,28 @@
                             <th>Aksi</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody>  
+                          @foreach ($data as $index => $item)                                   
                           <tr>
                             <td>
-                              1
+                              {{ $index + 1 }}
                             </td>
-                            <td>01-02-2026</td>
-                            <td>Rp. 20.000</td>
-                            <td>Pembelian gas lpg</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
+                            <td>{{ $item->keterangan }}</td>
                             <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
+                              <a type="button" 
+                                 data-toggle="modal" 
+                                 data-target="#editModal" 
+                                 class="btn btn-warning btn-edit-operasional text-white"
+                                 data-id="{{ $item->id }}"
+                                 data-nama="{{ $item->keterangan }}"
+                                 data-nominal="{{ $item->nominal }}"
+                                 >Edit</a>
+                              <a href="#" type="button" class="btn btn-danger btn-hapus-operasional" data-id="{{ $item->id }}" id="hapus-supplier">Hapus</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>04-02-2026</td>
-                            <td>Rp. 300.000</td>
-                            <td>Pembayaran wiffi</td>
-                            <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -73,4 +70,86 @@
             </div>
           </div>
         </section>
+
+          <div class="modal fade" tabindex="-1" role="dialog" id="tambahModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Input Operasional</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{{ route('operasional.create') }}" method="POST" class="needs-validation" novalidate>
+                    @csrf
+                    <div class="form-group">
+                      <label>Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" required>
+                      <div class="invalid-feedback">
+                        Keterangan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Nominal</label>
+                      <input type="number" name="nominal" class="form-control" required>
+                      <div class="invalid-feedback">
+                        Nominal tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Edit Operasional</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" id="editForm" class="needs-validation" novalidate>
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                      <label>Keterangan</label>
+                      <input type="text" class="form-control" name="keterangan" id="edit_nama" required>
+                      <div class="invalid-feedback">
+                        Keterangan tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Nominal</label>
+                      <input type="number" class="form-control" name="nominal" id="edit_nominal" required>
+                      <div class="invalid-feedback">
+                        Nominal tidak boleh kosong
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form id="form-hapus" method="POST" style="display:none;">
+              @csrf
+              @method('DELETE')
+          </form>
+
+          @if(session('success'))
+            <div id="flash-success" data-message="{{ session('success') }}"></div>
+          @endif
 @endsection

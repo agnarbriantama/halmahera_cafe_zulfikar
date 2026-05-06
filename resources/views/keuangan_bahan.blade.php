@@ -23,21 +23,25 @@
                     <h4>Form Input Pembelian Bahan</h4>
                   </div>
                   <div class="card-body">
+                    <form action="{{ route('keuangan-bahan.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                       <label>Nama Bahan</label>
-                      <select class="form-control select2">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                      <select id="bahan_select" name="bahan_id" class="form-control">
+                          @foreach($data as $item)
+                              <option value="{{ $item->id }}">
+                                  {{ $item->nama_bahan }}
+                              </option>
+                          @endforeach
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Satuan</label>
-                      <input type="text" class="form-control">
+                      <input type="text" name="satuan" id="satuan" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                       <label>Jumlah Bahan</label>
-                      <input type="number" class="form-control">
+                      <input type="number" name="jumlah" class="form-control">
                     </div>
                     <div class="form-group">
                       <label>Total Harga</label>
@@ -47,16 +51,49 @@
                             $
                           </div>
                         </div>
-                        <input type="text" class="form-control currency">
+                        <input type="number" name="nominal" class="form-control currency">
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-3">
-                      <a href="#" class="btn btn-success">Tambah</a>
+                      <button type="submit"  class="btn btn-success">Tambah</button>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        @if(session('success'))
+            <div id="flash-success" data-message="{{ session('success') }}"></div>
+        @endif
+        <script>
+            var bahanData = JSON.parse('@json($data)');
+        </script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+
+              const select = document.getElementById('bahan_select');
+              const inputSatuan = document.getElementById('satuan');
+
+              select.addEventListener('change', function () {
+                  const id = this.value;
+
+                  const bahan = bahanData.find(item => item.id == id);
+
+                  console.log('ID:', id);
+                  console.log('DATA:', bahan);
+
+                  if (bahan) {
+                      inputSatuan.value = bahan.satuan;
+                  } else {
+                      inputSatuan.value = '';
+                  }
+              });
+
+              // trigger awal
+              select.dispatchEvent(new window.Event('change'));
+
+          });
+        </script>
 @endsection

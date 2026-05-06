@@ -36,27 +36,18 @@
                             <th>Ketarangan</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody> 
+                          @foreach ($data as $index => $item)                                     
                           <tr>
                             <td>
-                              1
+                              {{ $index + 1 }}
                             </td>
-                            <td>Beras</td>
-                            <td>Penambahan</td>
-                            <td>1 kg</td>
-                            <td>Pembelian dari toko beras</td>
-                            
+                            <td>{{ $item->nama_bahan }}</td>
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->jumlah }} {{ $item->satuan }}</td>
+                            <td>{{ $item->keterangan }}</td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>Aqua Botol</td>
-                            <td>Penambahan</td>
-                            <td>2 kardus</td>
-                            <td>Pembelian dari alfamart</td>
-                            
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

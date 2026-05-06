@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BahanModel;
+use App\Models\HistoryBahanModel;
 
 class StokBahanController extends Controller
 {
@@ -66,6 +67,7 @@ class StokBahanController extends Controller
 
     public function history()
     {
-        return view('history');
+        $data = HistoryBahanModel::latest()->get();
+        return view('history', compact('data'));
     }
 }
