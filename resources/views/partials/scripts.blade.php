@@ -124,6 +124,70 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('.btn-edit-kategori');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nama = this.dataset.nama;
+                const keterangan = this.dataset.keterangan;
+
+                document.getElementById('edit_nama').value = nama;
+                document.getElementById('edit_keterangan').value = keterangan;
+
+                // set action form
+                document.getElementById('editForm').action = `/kategori-menu/${id}`;
+            });
+        });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const buttons = document.querySelectorAll('.btn-tambah-stok');
+
+        buttons.forEach(button => {
+
+            button.addEventListener('click', function () {
+
+                document.getElementById('tambah_bahan_id').value = this.dataset.id;
+
+                document.getElementById('tambah_nama').value = this.dataset.nama;
+
+                document.getElementById('tambah_satuan').value = this.dataset.satuan;
+
+            });
+
+        });
+
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const buttons = document.querySelectorAll('.btn-pengurangan-stok');
+
+        buttons.forEach(button => {
+
+            button.addEventListener('click', function () {
+
+                document.getElementById('pengurangan_bahan_id').value = this.dataset.id;
+
+                document.getElementById('pengurangan_nama').value = this.dataset.nama;
+
+                document.getElementById('pengurangan_satuan').value = this.dataset.satuan;
+
+            });
+
+        });
+
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll('.btn-hapus');
 
     buttons.forEach(btn => {
@@ -251,26 +315,41 @@
         });
     });
 
-   
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.btn-hapus-kategori');
 
-    $("#hapus-kategori").click(function() {
-    swal({
-        title: 'Kamu yakin?',
-        text: 'Menghapus data kategori maka data tidak bisa di pulihkan kembali!',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-        swal('Data kategori berhasil terhapus', {
-            icon: 'success',
-        });
-        } else {
-        swal('Data kategori tidak jadi terhapus!');
-        }
+    buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.dataset.id;
+
+                swal({
+                    title: 'Kamu yakin?',
+                    text: 'Menghapus data kategori maka data tidak bisa di pulihkan kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+
+                        // set action form
+                        const form = document.getElementById('form-hapus');
+                        form.action = `/kategori-menu/${id}`;
+
+                        form.submit(); // 🔥 kirim ke Laravel
+
+                    } else {
+                        swal('Data kategori tidak jadi terhapus!');
+                    }
+                });
+            });
         });
     });
+
+   
+
+    
 
     $("#hapus-menu").click(function() {
     swal({

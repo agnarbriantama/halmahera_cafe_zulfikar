@@ -8,6 +8,7 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\StokBahanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\KategoriMenuController;
 use App\Http\Controllers\PembelianBahanController;
 
 /*
@@ -34,6 +35,8 @@ Route::put('/stok-bahan/{id}', [StokBahanController::class, 'update'])->name('ba
 Route::delete('/stok-bahan/{id}', [StokBahanController::class, 'destroy'])->name('bahan.destroy');
 
 Route::get('/stok', [StokBahanController::class, 'stok_bahan'])->name('stok');
+Route::post('/stok/tambah', [StokBahanController::class, 'tambah'])->name('stok.tambah');
+Route::post('/stok/pengurangan', [StokBahanController::class, 'pengurangan'])->name('stok.pengurangan');
 
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
 Route::post('/supplier', [SupplierController::class, 'create'])->name('supplier.create');
@@ -42,7 +45,11 @@ Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('s
 
 Route::get('/history-stok', [StokBahanController::class, 'history'])->name('history');
 
-Route::get('/kategori-menu', [MenuController::class, 'kategori'])->name('kategori');
+Route::get('/kategori-menu', [KategoriMenuController::class, 'index'])->name('kategori');
+Route::post('/kategori-menu', [KategoriMenuController::class, 'create'])->name('kategori.create');
+Route::put('/kategori-menu/{id}', [KategoriMenuController::class, 'update'])->name('kategori.update');
+Route::delete('/kategori-menu/{id}', [KategoriMenuController::class, 'destroy'])->name('kategori.destroy');
+
 Route::get('/daftar-menu', [MenuController::class, 'menu'])->name('menu');
 
 Route::get('/laporan-harian', [KeuanganController::class, 'laporan_harian'])->name('harian');

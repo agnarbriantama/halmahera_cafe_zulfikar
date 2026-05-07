@@ -38,40 +38,27 @@
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody> 
+                          @foreach ($data as $index => $item)                                  
                           <tr>
                             <td>
-                              1
+                              {{ $index +1 }}
                             </td>
-                            <td>Ice Drink</td>
-                            <td>Untuk minuman dingin</td>
+                            <td>{{ $item->nama_kategori }}</td>
+                            <td>{{ $item->keterangan }}</td>
                             <td>
-                              <a href="#" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editKategori">Edit</a>
-                              <a href="#" type="button" class="btn btn-danger" id="hapus-kategori">Hapus</a>
+                              <a type="button" 
+                                 data-toggle="modal" 
+                                 data-target="#editKategori" 
+                                 class="btn btn-warning btn-edit-kategori text-white"
+                                 data-id="{{ $item->id }}"
+                                 data-nama="{{ $item->nama_kategori }}"
+                                 data-keterangan="{{ $item->keterangan }}"
+                                 >Edit</a>
+                              <a href="#" type="button" class="btn btn-danger btn-hapus-kategori" data-id="{{ $item->id }}" id="hapus-kategori">Hapus</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>Hot Coffea</td>
-                            <td>untuk jenis minuman kopi panas</td>
-                            <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              3
-                            </td>
-                            <td>Ice Fruit</td>
-                            <td>untuk minuman buah buahan</td>
-                            <td>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -91,17 +78,18 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="needs-validation" novalidate="">
+                  <form action="{{ route('kategori.create') }}" method="POST" class="needs-validation" novalidate>
+                    @csrf
                     <div class="form-group">
                       <label>Nama Kategori</label>
-                      <input type="text" class="form-control" required="">
+                      <input type="text" class="form-control" name="nama_kategori" required>
                       <div class="invalid-feedback">
                         Nama kategori tidak boleh kosong
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Keterangan</label>
-                      <input type="number" class="form-control" required="">
+                      <input type="text" class="form-control" name="keterangan" required>
                       <div class="invalid-feedback">
                         Keterangan tidak boleh kosong
                       </div>
@@ -109,7 +97,7 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
                 </div>
               </div>
@@ -125,17 +113,19 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="needs-validation" novalidate="">
+                  <form method="POST" id="editForm" class="needs-validation" novalidate>
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                       <label>Nama Kategori</label>
-                      <input type="text" class="form-control" required="">
+                      <input type="text" class="form-control" name="nama_kategori" id="edit_nama" required>
                       <div class="invalid-feedback">
                         Nama kategori tidak boleh kosong
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Keterangan</label>
-                      <input type="number" class="form-control" required="">
+                      <input type="text" class="form-control" name="keterangan" id="edit_keterangan" required>
                       <div class="invalid-feedback">
                         Keterangan tidak boleh kosong
                       </div>
@@ -143,10 +133,19 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
+
+          <form id="form-hapus" method="POST" style="display:none;">
+              @csrf
+              @method('DELETE')
+          </form>
+
+          @if(session('success'))
+            <div id="flash-success" data-message="{{ session('success') }}"></div>
+          @endif
 @endsection
