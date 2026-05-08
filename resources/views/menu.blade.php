@@ -24,7 +24,7 @@
                   </div>
                   <div class="card-body">
                     <div class="mb-3">
-                      <a href="" class="btn btn-success">Tambah Menu</a>
+                      <a href="" class="btn btn-success" data-toggle="modal" data-target="#tambahMenu">Tambah Menu</a>
                     </div>
                     <div class="table-responsive">
                       <table class="table table-striped" id="table-1">
@@ -39,46 +39,22 @@
                             <th>Aksi</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody>
+                          @foreach ($data as $index => $item)                                        
                           <tr>
                             <td>
-                              1
+                              {{ $index +1 }}
                             </td>
-                            <td>Beauty hanny coffe</td>
-                            <td>Rp. 20.000</td>
-                            <td>Hot Coffe</td>
+                            <td>{{ $item->nama_menu }}</td>
+                            <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <td>{{ $item->kategori_id }}</td>
                             <td>
                               <a href="#" type="button" data-toggle="modal" data-target="#detailResep" class="btn btn-primary">Detail Resep</a>
                               <a href="#" class="btn btn-warning">Edit</a>
                               <a href="#" type="button" id="hapus-menu" class="btn btn-danger">Hapus</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>Es Lemon Tea</td>
-                            <td>Rp. 15.000</td>
-                            <td>Es Fruit</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail Resep</a>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              3
-                            </td>
-                            <td>Es Oreo Coffea</td>
-                            <td>Rp. 25.000</td>
-                            <td>Es Coffea</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail Resep</a>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" class="btn btn-danger">Hapus</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -88,23 +64,59 @@
             </div>
           </div>
         </section>
-          <div class="modal fade" tabindex="-1" role="dialog" id="detailResep">
+          <div class="modal fade" tabindex="-1" role="dialog" id="tambahMenu">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Detail Resep</h5>
+                  <h5 class="modal-title">Form Tambah Menu</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  
+                  <form action="{{ route('menu.create') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    @csrf
+                    <div class="form-group">
+                      <label>Nama Menu</label>
+                      <input type="text" class="form-control" name="nama_menu" required>
+                      <div class="invalid-feedback">
+                        Nama menu tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select name="kategori_id" class="form-control">
+                            <option>-- Pilih kategori --</option>
+                            @foreach($kategori as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_kategori }}
+                                </option>
+                            @endforeach
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Harga</label>
+                      <input type="number" class="form-control" name="harga" required>
+                      <div class="invalid-feedback">
+                        Harga tidak boleh kosong
+                      </div>
+                    </div>
+                     <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="foto" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button class="btn btn-primary">Simpan</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+
+          @if(session('success'))
+            <div id="flash-success" data-message="{{ session('success') }}"></div>
+          @endif
 @endsection

@@ -50,7 +50,10 @@ Route::post('/kategori-menu', [KategoriMenuController::class, 'create'])->name('
 Route::put('/kategori-menu/{id}', [KategoriMenuController::class, 'update'])->name('kategori.update');
 Route::delete('/kategori-menu/{id}', [KategoriMenuController::class, 'destroy'])->name('kategori.destroy');
 
-Route::get('/daftar-menu', [MenuController::class, 'menu'])->name('menu');
+Route::get('/daftar-menu', [MenuController::class, 'index'])->name('menu');
+Route::post('/daftar-menu', [MenuController::class, 'create'])->name('menu.create');
+Route::put('/daftar-menu/{id}', [MenuController::class, 'update'])->name('menu.update');
+Route::delete('/daftar-menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
 Route::get('/laporan-harian', [KeuanganController::class, 'laporan_harian'])->name('harian');
 Route::get('/laporan-mingguan', [KeuanganController::class, 'laporan_mingguan'])->name('mingguan');
