@@ -50,8 +50,17 @@
                             <td>{{ $item->kategori_id }}</td>
                             <td>
                               <a href="#" type="button" data-toggle="modal" data-target="#detailResep" class="btn btn-primary">Detail Resep</a>
-                              <a href="#" class="btn btn-warning">Edit</a>
-                              <a href="#" type="button" id="hapus-menu" class="btn btn-danger">Hapus</a>
+                              <a type="button" 
+                                 data-toggle="modal" 
+                                 data-target="#editMenu" 
+                                 class="btn btn-warning btn-edit-menu text-white"
+                                 data-id="{{ $item->id }}"
+                                 data-nama="{{ $item->nama_menu }}"
+                                 data-harga="{{ $item->harga }}"
+                                 data-kategori="{{ $item->kategori_id }}"
+                                 data-deskripsi="{{ $item->deskripsi }}"
+                                 >Edit</a>
+                              <a href="#" type="button" class="btn btn-danger btn-hapus-menu" data-id="{{ $item->id }}" id="hapus-menu">Hapus</a>
                             </td>
                           </tr>
                           @endforeach
@@ -102,6 +111,10 @@
                         Harga tidak boleh kosong
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label>Deskripsi</label>
+                      <input type="text" class="form-control" name="deskripsi">
+                    </div>
                      <div class="form-group">
                         <label>Foto</label>
                         <input type="file" name="foto" class="form-control">
@@ -115,6 +128,64 @@
               </div>
             </div>
           </div>
+
+          <div class="modal fade" tabindex="-1" role="dialog" id="editMenu">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Form Edit Menu</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" id="editForm" class="needs-validation" novalidate>
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                      <label>Nama Menu</label>
+                      <input type="text" class="form-control" name="nama_menu" id="edit_nama" required>
+                      <div class="invalid-feedback">
+                        Nama menu tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Harga</label>
+                      <input type="number" class="form-control" name="harga" id="edit_harga" required>
+                      <div class="invalid-feedback">
+                        Minimal Stok tidak boleh kosong
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select class="form-control" name="kategori_id" id="edit_kategori" required>
+                            @foreach($kategori as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">
+                            Kategori tidak boleh kosong
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" id="edit_deskripsi" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form id="form-hapus" method="POST" style="display:none;">
+              @csrf
+              @method('DELETE')
+          </form>
 
           @if(session('success'))
             <div id="flash-success" data-message="{{ session('success') }}"></div>

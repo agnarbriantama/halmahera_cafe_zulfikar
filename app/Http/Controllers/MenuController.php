@@ -38,14 +38,6 @@ class MenuController extends Controller
 
     public function update(Request $request, int $id)
     {
-        $foto = null;
-
-        if ($request->hasFile('foto')) {
-
-            $foto = $request->file('foto')
-                            ->store('menu', 'public');
-        }
-
         $menu = MenuModel::findOrFail($id);
 
         $menu->update([
@@ -53,7 +45,6 @@ class MenuController extends Controller
             'nama_menu' => $request->nama_menu,
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
-            'foto' => $foto,
         ]);
 
         return back()->with('success', 'Menu berhasil diupdate');

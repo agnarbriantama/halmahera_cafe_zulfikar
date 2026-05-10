@@ -144,6 +144,30 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('.btn-edit-menu');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const nama = this.dataset.nama;
+                const harga = this.dataset.harga;
+                const kategori = this.dataset.kategori;
+                const deskripsi = this.dataset.deskripsi;
+
+                document.getElementById('edit_nama').value = nama;
+                document.getElementById('edit_harga').value = harga;
+                document.getElementById('edit_kategori').value = kategori;
+                document.getElementById('edit_deskripsi').value = deskripsi;
+
+                // set action form
+                document.getElementById('editForm').action = `/daftar-menu/${id}`;
+            });
+        });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
 
         const buttons = document.querySelectorAll('.btn-tambah-stok');
 
@@ -347,26 +371,36 @@
         });
     });
 
-   
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.btn-hapus-menu');
 
-    
+    buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
 
-    $("#hapus-menu").click(function() {
-    swal({
-        title: 'Kamu yakin?',
-        text: 'Menghapus data menu maka data tidak bisa di pulihkan kembali!',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-        })
-        .then((willDelete) => {
-        if (willDelete) {
-        swal('Data menu berhasil terhapus', {
-            icon: 'success',
-        });
-        } else {
-        swal('Data menu tidak jadi terhapus!');
-        }
+                const id = this.dataset.id;
+
+                swal({
+                    title: 'Kamu yakin?',
+                    text: 'Menghapus data menu maka data tidak bisa di pulihkan kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+
+                        // set action form
+                        const form = document.getElementById('form-hapus');
+                        form.action = `/daftar-menu/${id}`;
+
+                        form.submit(); // 🔥 kirim ke Laravel
+
+                    } else {
+                        swal('Data menu tidak jadi terhapus!');
+                    }
+                });
+            });
         });
     });
+
   </script>
