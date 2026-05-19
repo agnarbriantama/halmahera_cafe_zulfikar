@@ -54,6 +54,11 @@ Route::get('/daftar-menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/daftar-menu', [MenuController::class, 'create'])->name('menu.create');
 Route::put('/daftar-menu/{id}', [MenuController::class, 'update'])->name('menu.update');
 Route::delete('/daftar-menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
+Route::get('/daftar-menu/detail/{id}', [MenuController::class, 'detail'])->name('menu.detail');
+
+Route::post('/resep', [MenuController::class, 'createResep'])->name('resep.create');
+Route::put('/resep/{id}', [MenuController::class, 'updateResep'])->name('resep.update');
+Route::delete('/resep/{id}', [MenuController::class, 'destroyResep'])->name('resep.destroy');
 
 Route::get('/laporan-harian', [KeuanganController::class, 'laporan_harian'])->name('harian');
 Route::get('/laporan-mingguan', [KeuanganController::class, 'laporan_mingguan'])->name('mingguan');

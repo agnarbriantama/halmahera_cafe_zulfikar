@@ -165,6 +165,26 @@
         });
     });
   </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('.btn-edit-resep');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.dataset.id;
+                const satuan = this.dataset.satuan;
+                const jumlah = this.dataset.jumlah;
+
+                document.getElementById('edit_satuan').value = satuan;
+                document.getElementById('edit_jumlah').value = jumlah;
+
+                // set action form
+                document.getElementById('editForm').action = `/resep/${id}`;
+            });
+        });
+    });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -397,6 +417,38 @@
 
                     } else {
                         swal('Data menu tidak jadi terhapus!');
+                    }
+                });
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.btn-hapus-resep');
+
+    buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.dataset.id;
+
+                swal({
+                    title: 'Kamu yakin?',
+                    text: 'Menghapus data resep maka data tidak bisa di pulihkan kembali!',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+
+                        // set action form
+                        const form = document.getElementById('form-hapus');
+                        form.action = `/resep/${id}`;
+
+                        form.submit(); // 🔥 kirim ke Laravel
+
+                    } else {
+                        swal('Data resep tidak jadi terhapus!');
                     }
                 });
             });

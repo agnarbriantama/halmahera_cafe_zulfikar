@@ -15,4 +15,14 @@ class MenuModel extends Model
         'deskripsi',
         'foto',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriModel::class);
+    }
+
+    public function resep()
+    {
+        return $this->hasMany(ResepModel::class, 'menu_id');
+    }
 }
