@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KasirController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\PembelianBahanController;
 // });
 
 Route::get('/', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/stok-bahan', [StokBahanController::class, 'index'])->name('bahan');

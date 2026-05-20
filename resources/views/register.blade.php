@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; Halmahera</title>
+  <title>Register &mdash; Stisla</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/bootstrap/css/bootstrap.min.css')}}">
+  
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/fontawesome/css/all.min.css')}}">
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/bootstrap-social/bootstrap-social.css')}}">
+  <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jquery-selectric/selectric.css')}}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/style.css')}}">
@@ -31,56 +32,59 @@
     <section class="section">
       <div class="container mt-5">
         <div class="row">
-          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
             <div class="login-brand">
               <img src="{{asset('stisla/dist/assets/img/stisla-fill.svg')}}" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Login</h4></div>
+              <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <form method="POST">
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="frist_name">Nama</label>
+                      <input id="frist_name" type="text" class="form-control" name="name" autofocus>
+                    </div>
+                    <div class="form-group col-6">
+                      <label>Role Akses</label>
+                      <select name="role" class="form-control selectric">
+                        <option value="kasir">Kasir</option>
+                        <option value="admin">Admin</option>
+                        <option value="owner">Owner</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <input id="email" type="email" class="form-control" name="email">
                     <div class="invalid-feedback">
-                      Please fill in your email
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <a href="auth-forgot-password.html" class="text-small">
-                          Forgot Password?
-                        </a>
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="password" class="d-block">Password</label>
+                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
+                      <div id="pwindicator" class="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
                       </div>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      please fill in your password
+                    <div class="form-group col-6">
+                      <label for="password2" class="d-block">Password Confirmation</label>
+                      <input id="password2" type="password" class="form-control" name="password-confirm">
                     </div>
                   </div>
-
                   <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Login
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                      Register
                     </button>
                   </div>
                 </form>
               </div>
-            </div>
-            <div class="mt-5 text-muted text-center">
-              Don't have an account? <a href="{{route('register')}}">Create One</a>
             </div>
             <div class="simple-footer">
               Copyright &copy; Stisla 2018
@@ -101,8 +105,11 @@
   <script src="{{asset('stisla/dist/assets/js/stisla.js')}}"></script>
   
   <!-- JS Libraies -->
+  <script src="{{asset('stisla/dist/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
+  <script src="{{asset('stisla/dist/assets/js/page/auth-register.js')}}"></script>
   
   <!-- Template JS File -->
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
