@@ -20,8 +20,22 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+
             $request->session()->regenerate();
-            return redirect('/dashboard'); // atau dashboard
+
+            $role = Auth::user()->role;
+
+            if ($role == 'admin') {
+                return redirect('/dashboard');
+            }
+
+            if ($role == 'kasir') {
+                return redirect('/kasir');
+            }
+
+            if ($role == 'owner') {
+                return redirect('/dashboard');
+            }
         }
 
         return back()->with('error', 'Email atau password salah');
