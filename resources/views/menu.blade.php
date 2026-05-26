@@ -94,15 +94,17 @@
                     </div>
                     <div class="form-group">
                         <label>Kategori</label>
-                        <select name="kategori_id" class="form-control">
-                            <option>-- Pilih kategori --</option>
+                        <select name="kategori_id" class="custom-select" required>
+                            <option value="">-- Pilih kategori --</option>
                             @foreach($kategori as $item)
                                 <option value="{{ $item->id }}">
                                     {{ $item->nama_kategori }}
                                 </option>
                             @endforeach
-
                         </select>
+                        <div class="invalid-feedback">
+                          Kategori tidak boleh kosong
+                        </div>
                     </div>
                     <div class="form-group">
                       <label>Harga</label>
@@ -159,6 +161,7 @@
                     <div class="form-group">
                         <label>Kategori</label>
                         <select class="form-control" name="kategori_id" id="edit_kategori" required>
+                            <option value="">-- Pilih kategori --</option>
                             @foreach($kategori as $item)
                                 <option value="{{ $item->id }}">
                                     {{ $item->nama_kategori }}

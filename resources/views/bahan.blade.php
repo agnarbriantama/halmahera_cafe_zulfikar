@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group">
                       <label>Satuan</label>
-                      <select class="custom-select" name="satuan">
+                      <select class="custom-select" name="satuan" required>
                           <option value="">-- Pilih Satuan --</option>
                           <option value="Kilogram">Kilogram</option>
                           <option value="Ons">Ons</option>
@@ -143,6 +143,7 @@
                     <div class="form-group">
                       <label>Satuan</label>
                       <select class="custom-select" name="satuan" id="edit_satuan" required>
+                          <option value="">-- Pilih Satuan --</option>
                           <option value="Kilogram">Kilogram</option>
                           <option value="Ons">Ons</option>
                           <option value="Gram">Gram</option>

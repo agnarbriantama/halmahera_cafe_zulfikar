@@ -23,7 +23,7 @@
                     <h4>Form Input Pembelian Bahan</h4>
                   </div>
                   <div class="card-body">
-                    <form action="{{ route('keuangan-bahan.store') }}" method="POST">
+                    <form action="{{ route('keuangan-bahan.store') }}" class="needs-validation" method="POST" novalidate>
                     @csrf
                     <div class="form-group">
                       <label>Nama Bahan</label>
@@ -41,7 +41,10 @@
                     </div>
                     <div class="form-group">
                       <label>Jumlah Bahan</label>
-                      <input type="number" name="jumlah" class="form-control">
+                      <input type="number" name="jumlah" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Jumlah bahan tidak boleh kosong
+                        </div>
                     </div>
                     <div class="form-group">
                       <label>Total Harga</label>
@@ -51,7 +54,10 @@
                             $
                           </div>
                         </div>
-                        <input type="number" name="nominal" class="form-control currency">
+                        <input type="number" name="nominal" class="form-control currency" required>
+                        <div class="invalid-feedback">
+                            Nominal tidak boleh kosong
+                        </div>
                       </div>
                     </div>
                     <div class="d-flex justify-content-end mb-3">
