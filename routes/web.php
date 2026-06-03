@@ -11,6 +11,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KategoriMenuController;
 use App\Http\Controllers\PembelianBahanController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,5 +95,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:kasir,admin'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
+    Route::post('/transaksi/checkout', [TransaksiController::class, 'checkout'])->name('checkout');
 });
 

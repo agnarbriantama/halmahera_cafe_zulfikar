@@ -14,4 +14,9 @@ class BahanModel extends Model
         'minimal_stok',
         'jumlah_stok',
     ];
+
+    public function resep()
+    {
+        return $this->hasMany(ResepModel::class, 'bahan_id');
+    }
 }

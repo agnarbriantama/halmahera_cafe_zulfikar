@@ -617,7 +617,12 @@
                                                 <img src="{{asset('electro/img/product-11.png')}}" class="img-fluid w-100 rounded-top"
                                                     alt="">
                                                 <div class="product-details">
-                                                    <a href="#"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                                                    <a href="#"
+                                                    class="btn-add-cart"
+                                                    data-id="{{ $menu->id }}"
+                                                    data-nama="{{ $menu->nama_menu }}"
+                                                    data-kategori="{{ $menu->kategori->nama_kategori }}"
+                                                    data-harga="{{ $menu->harga }}"><i class="fas fa-shopping-cart fa-1x"></i></a>
                                                 </div>
                                             </div>
                                             <div class="text-center rounded-bottom p-4">
@@ -738,113 +743,6 @@
                             <th scope="col">Handle</th>
                         </tr>
                     </thead>
-                    <!-- <tbody>
-                        <tr>
-                            <th scope="row">
-                                <p class="mb-0 py-4">Apple iPad Mini</p>
-                            </th>
-                            <td>
-                                <p class="mb-0 py-4">G2356</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity py-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td class="py-4">
-                                <button class="btn btn-md rounded-circle bg-light border">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <p class="mb-0 py-4">Apple iPad Mini</p>
-                            </th>
-                            <td>
-                                <p class="mb-0 py-4">G2356</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity py-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td class="py-4">
-                                <button class="btn btn-md rounded-circle bg-light border">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <p class="mb-0 py-4">Apple iPad Mini</p>
-                            </th>
-                            <td>
-                                <p class="mb-0 py-4">G2356</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity py-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 py-4">2.99 $</p>
-                            </td>
-                            <td class="py-4">
-                                <button class="btn btn-md rounded-circle bg-light border">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody> -->
                     <tbody id="cart-body">
 
                     </tbody>
@@ -855,14 +753,14 @@
                     <div class="col-md-12 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="form-item">
                             <label class="form-label my-3">Nama<sup>*</sup></label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="nama_customer" class="form-control">
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Type Pembayaran<sup>*</sup></label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Pilih Pembayaran</option>
-                                <option value="1">Cash</option>
-                                <option value="2">Qrir</option>
+                            <select class="form-select" id="metode_pembayaran" aria-label="Default select example">
+                                <option value="">Pilih Pembayaran</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Qris">Qris</option>
                             </select>
                         </div>
                         <div class="form-item">
@@ -906,35 +804,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-2">
-                            <div class="col-12">
-                                <div class="form-check text-start my-2">
-                                    <input type="checkbox" class="form-check-input bg-primary border-0" id="Payments-1"
-                                        name="Payments" value="Payments">
-                                    <label class="form-check-label" for="Payments-1">Check Payments</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-2">
-                            <div class="col-12">
-                                <div class="form-check text-start my-2">
-                                    <input type="checkbox" class="form-check-input bg-primary border-0" id="Delivery-1"
-                                        name="Delivery" value="Delivery">
-                                    <label class="form-check-label" for="Delivery-1">Cash On Delivery</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-2">
-                            <div class="col-12">
-                                <div class="form-check text-start my-2">
-                                    <input type="checkbox" class="form-check-input bg-primary border-0" id="Paypal-1"
-                                        name="Paypal" value="Paypal">
-                                    <label class="form-check-label" for="Paypal-1">Paypal</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                             <button type="button"
+                                id="btn-checkout"
                                 class="btn btn-primary border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place
                                 Order</button>
                         </div>
@@ -1092,8 +964,14 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('electro/js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     let cart = [];
+
+    let subtotal = 0;
+    let pajak = 0;
+    let service = 0;
+    let grandTotal = 0;
 
     $(document).on('click', '.btn-add-cart', function(e) {
         e.preventDefault();
@@ -1119,54 +997,6 @@
 
         renderCart();
     });
-
-    function renderCart() {
-
-        let html = '';
-
-        cart.forEach((item, index) => {
-
-            let total = item.harga * item.qty;
-
-            html += `
-                <tr>
-                    <td>${item.nama}</td>
-                    <td>${item.kategori}</td>
-
-                    <td>
-                        Rp ${item.harga.toLocaleString('id-ID')}
-                    </td>
-
-                    <td>
-                        <button class="btn-minus btn btn-sm btn-danger"
-                            data-index="${index}">
-                            -
-                        </button>
-
-                        ${item.qty}
-
-                        <button class="btn-plus btn btn-sm btn-success"
-                            data-index="${index}">
-                            +
-                        </button>
-                    </td>
-
-                    <td>
-                        Rp ${total.toLocaleString('id-ID')}
-                    </td>
-
-                    <td>
-                        <button class="btn-remove btn btn-sm btn-danger"
-                            data-index="${index}">
-                            Hapus
-                        </button>
-                    </td>
-                </tr>
-            `;
-        });
-
-        $('#cart-body').html(html);
-    }
 
     // tambah qtt
     $(document).on('click', '.btn-plus', function() {
@@ -1204,7 +1034,7 @@
     function renderCart() {
 
         let html = '';
-        let subtotal = 0;
+        subtotal = 0;
 
         cart.forEach((item, index) => {
 
@@ -1256,15 +1086,115 @@
         );
 
         // hitung total
-        let pajak = subtotal * 0.10;
-        let service = subtotal * 0.05;
+        pajak = subtotal * 0.10;
+        service = subtotal * 0.05;
 
-        let grandTotal = subtotal + pajak + service;
+        grandTotal = subtotal + pajak + service;
 
         $('#total').text(
             'Rp ' + grandTotal.toLocaleString('id-ID')
         );
     }
+
+    $('#btn-checkout').click(function() {
+
+        let namaCustomer = $('#nama_customer').val();
+        let metodePembayaran = $('#metode_pembayaran').val();
+
+        if (cart.length === 0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Keranjang masih kosong'
+            });
+            return;
+        }
+
+        if ($('#nama_customer').val().trim() === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Nama customer wajib diisi'
+            });
+            return;
+        }
+
+        if (metodePembayaran === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Peringatan',
+                text: 'Pilih metode pembayaran'
+            });
+            return;
+        }
+
+        let items = cart.map(item => ({
+            menu_id: item.id,
+            harga: item.harga,
+            qty: item.qty
+        }));
+
+        Swal.fire({
+            title: 'Menyimpan transaksi...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        $.ajax({
+            url: "{{ route('checkout') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                nama_customer: namaCustomer,
+                metode_pembayaran: metodePembayaran,
+                subtotal: subtotal,
+                pajak: pajak,
+                service: service,
+                grand_total: grandTotal,
+                items: items
+            },
+            success: function(response) {
+
+                console.log(response);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Transaksi Berhasil',
+                    text: 'Pesanan berhasil disimpan',
+                    confirmButtonText: 'OK'
+                });
+
+                // reset cart
+                cart = [];
+
+                // render ulang tabel
+                renderCart();
+
+                // reset form
+                $('#nama_customer').val('');
+                $('#metode_pembayaran').val('');
+
+            },
+            error: function(xhr) {
+
+                let message = 'Terjadi kesalahan';
+
+                if (xhr.responseJSON?.message) {
+                    message = xhr.responseJSON.message;
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Transaksi Ditolak',
+                    text: message
+                });
+
+            }
+        });
+
+    });
     </script>
 </body>
 
