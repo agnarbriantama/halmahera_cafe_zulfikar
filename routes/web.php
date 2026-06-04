@@ -95,6 +95,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:kasir,admin'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
+    Route::get('/riwayat-pesanan', [KasirController::class, 'riwayat'])->name('riwayat');
+    Route::get('/transaksi/{id}/detail', [KasirController::class, 'detail'])->name('transaksi.detail');
+    Route::get('/transaksi/{id}/ajax-detail', [KasirController::class, 'ajaxDetail']);
     Route::post('/transaksi/checkout', [TransaksiController::class, 'checkout'])->name('checkout');
+    Route::get('/transaksi/{id}/print', [TransaksiController::class, 'print'])->name('transaksi.print');
 });
 

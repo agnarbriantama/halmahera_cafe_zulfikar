@@ -198,8 +198,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Menu</a>
-                            <a href="single.html" class="nav-item nav-link">Order</a>
+                            <a href="{{route('kasir')}}" class="nav-item nav-link active">Menu</a>
+                            <a href="{{route('riwayat')}}" class="nav-item nav-link">Riwayat Pesanan</a>
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">All
                                         Category</span></a>
@@ -239,8 +239,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
-                                class="fa fa-mobile-alt me-2"></i> +0123 456 7890</a>
+                        <a href="{{route('logout')}}" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
+                                class="fa fa-mobile-alt me-2"></i> Logout</a>
                     </div>
                 </nav>
             </div>
@@ -954,6 +954,10 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
 
+    <!-- 🔥 PRINT IFRAME (HIDDEN) -->
+    <!-- <iframe id="printFrame" style="display:none;"></iframe> -->
+    <iframe id="printFrame" style="position:absolute; width:0; height:0; border:0;"></iframe>
+
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -1157,25 +1161,21 @@
             },
             success: function(response) {
 
-                console.log(response);
+                Swal.close();
 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Transaksi Berhasil',
-                    text: 'Pesanan berhasil disimpan',
-                    confirmButtonText: 'OK'
-                });
+                if (response.success) {
 
-                // reset cart
-                cart = [];
+                    // 🔥 LOAD PRINT TANPA KEDIP
+                    let iframe = document.getElementById('printFrame');
+                    iframe.src = response.redirect;
 
-                // render ulang tabel
-                renderCart();
+                    // reset cart
+                    cart = [];
+                    renderCart();
 
-                // reset form
-                $('#nama_customer').val('');
-                $('#metode_pembayaran').val('');
-
+                    $('#nama_customer').val('');
+                    $('#metode_pembayaran').val('');
+                }
             },
             error: function(xhr) {
 

@@ -89,8 +89,9 @@ class TransaksiController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Transaksi berhasil disimpan',
-                'transaksi_id' => $transaksi->id,
+                // 'message' => 'Transaksi berhasil disimpan',
+                // 'transaksi_id' => $transaksi->id,
+                'redirect' => route('transaksi.print', $transaksi->id)
             ]);
 
         } catch (\Exception $e) {
@@ -112,5 +113,12 @@ class TransaksiController extends Controller
             ->count() + 1;
 
         return 'TRX-' . $tanggal . '-' . str_pad($last, 4, '0', STR_PAD_LEFT);
+    }
+
+    public function print(int $id)
+    {
+        $transaksi = TransaksiModel::with(['user', 'details.menu'])->findOrFail($id);
+
+        return view('transaksi.print', compact('transaksi'));
     }
 }
