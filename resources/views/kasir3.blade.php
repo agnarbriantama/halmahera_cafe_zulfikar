@@ -569,25 +569,36 @@
                     </div> -->
                     <div class="row g-4">
                         <div class="col-xl-7">
-                            <div class="input-group w-100 mx-auto d-flex">
+                            <!-- <div class="input-group w-100 mx-auto d-flex">
                                 <input type="search" class="form-control p-3" placeholder="keywords"
                                     aria-describedby="search-icon-1">
                                 <span id="search-icon-1" class="input-group-text p-3"><i
                                         class="fa fa-search"></i></span>
-                            </div>
+                            </div> -->
+                            <form method="GET" action="{{ route('kasir') }}">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search"
+                                        id="search"
+                                        class="form-control p-3"
+                                        placeholder="Cari menu...">
+
+                                    <span class="input-group-text p-3">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-xl-3 text-end">
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between">
-                                <label for="electronics">Sort By:</label>
-                                <select id="electronics" name="electronicslist"
-                                    class="border-0 form-select-sm bg-light me-3" form="electronicsform">
-                                    <option value="volvo">Default Sorting</option>
-                                    <option value="volv">Nothing</option>
-                                    <option value="sab">Popularity</option>
-                                    <option value="saab">Newness</option>
-                                    <option value="opel">Average Rating</option>
-                                    <option value="audio">Low to high</option>
-                                    <option value="audi">High to low</option>
+                                <label for="electronics">Kategori :</label>
+                                <select id="kategori" class="border-0 form-select-sm bg-light me-3">
+                                    <option value="">Semua Kategori</option>
+
+                                    @foreach ($kategori as $k)
+                                        <option value="{{ $k->id }}">
+                                            {{ $k->nama_kategori }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -606,7 +617,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tab-content">
+                    <div id="menu-container" class="tab-content">
                         <div id="tab-5" class="tab-pane fade show p-0 active">
                             <div class="row g-4 product">
                                 @foreach ($data as $index => $menu) 
@@ -1195,6 +1206,63 @@
         });
 
     });
+    </script>
+    <script>
+        const searchInput = document.getElementById('search');
+
+        searchInput.addEventListener('input', function () {
+
+            let search = this.value;
+
+            fetch(`{{ route('kasir') }}?search=${search}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.text())
+            .then(html => {
+
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(html, 'text/html');
+
+                let newMenu = doc.querySelector('#menu-container');
+
+                if (newMenu) {
+                    document.querySelector('#menu-container').innerHTML = newMenu.innerHTML;
+                }
+
+            })
+            .catch(error => {
+                console.log('Search error:', error);
+            });
+
+        });
+
+        document.getElementById('kategori').addEventListener('change', function () {
+
+            let kategori = this.value;
+            let search = document.getElementById('search').value;
+
+            fetch(`{{ route('kasir') }}?kategori_id=${kategori}&search=${search}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.text())
+            .then(html => {
+
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(html, 'text/html');
+
+                let newMenu = doc.querySelector('#menu-container');
+
+                if (newMenu) {
+                    document.querySelector('#menu-container').innerHTML = newMenu.innerHTML;
+                }
+
+            });
+
+        });
     </script>
 </body>
 
