@@ -17,37 +17,10 @@
             <h2 class="section-title">Laporan Mingguan</h2>
             <p class="section-lead"> {{ $startDate->format('d-m-Y') }} - {{ $endDate->format('d-m-Y') }}</p>
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Detail Laporan</h4>
-                        </div>
-                        <div class="card-body">
-                                <div class="col-12 col-md-6 col-lg-6">
-                                    <div class="alert alert-success">
-                                        Income :
-                                        Rp {{ number_format($income,0,',','.') }}
-                                    </div>
-
-                                    <div class="alert alert-danger">
-                                        Expense :
-                                        Rp {{ number_format($expense,0,',','.') }}
-                                    </div>
-
-                                    <div class="alert alert-primary">
-                                        Laba :
-                                        Rp {{ number_format($income - $expense,0,',','.') }}
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tabel Transaksi</h4>
+                    <h4>Tabel Transaksi = Income</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -75,6 +48,11 @@
                           @endforeach
                         </tbody>
                       </table>
+                      <div class="alert alert-primary">
+                            <div class="d-flex justify-content-end">
+                                <span>Total : Rp {{ number_format($income,0,',','.') }}</span>
+                            </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -84,7 +62,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tabel Pengeluaran</h4>
+                    <h4>Tabel Pengeluaran = Expence</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -112,7 +90,30 @@
                           @endforeach
                         </tbody>
                       </table>
+                      <div class="alert alert-primary">
+                            <div class="d-flex justify-content-end">
+                                <span>Total : Rp {{ number_format($expense,0,',','.') }}</span>
+                            </div>
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                      <div class="alert alert-primary">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Income : Rp {{ number_format($income,0,',','.') }} - Expence : Rp {{ number_format($expense,0,',','.') }}</strong>
+                                </div>
+                                <div>
+                                    <strong>Laba : Rp {{ number_format($income - $expense,0,',','.') }}</strong>
+                                </div>
+                            </div>
+                      </div>
                   </div>
                 </div>
               </div>

@@ -14,35 +14,8 @@
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">Laporan Bulanan</h2>
+            <h2 class="section-title">Laporan Bulan</h2>
             <p class="section-lead"> {{ \Carbon\Carbon::create()->month($bulan)->translatedFormat('F') }} {{ $tahun }}</p>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Detail Laporan</h4>
-                        </div>
-                        <div class="card-body">
-                                <div class="col-12 col-md-6 col-lg-6">
-                                    <div class="alert alert-success">
-                                        Income :
-                                        Rp {{ number_format($income,0,',','.') }}
-                                    </div>
-
-                                    <div class="alert alert-danger">
-                                        Expense :
-                                        Rp {{ number_format($expense,0,',','.') }}
-                                    </div>
-
-                                    <div class="alert alert-primary">
-                                        Laba :
-                                        Rp {{ number_format($income - $expense,0,',','.') }}
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
               <div class="col-12">
                 <div class="card">
@@ -75,7 +48,7 @@
                           @endforeach
                         </tbody>
                       </table>
-                       <div class="alert alert-secondary">
+                       <div class="alert alert-primary">
                             <div class="d-flex justify-content-end">
                                 <span>Total : Rp {{ number_format($income,0,',','.') }}</span>
                             </div>
@@ -117,7 +90,7 @@
                           @endforeach
                         </tbody>
                       </table>
-                      <div class="alert alert-secondary">
+                      <div class="alert alert-primary">
                             <div class="d-flex justify-content-end">
                                 <span>Total : Rp {{ number_format($expense,0,',','.') }}</span>
                             </div>
@@ -131,7 +104,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
-                      <div class="alert alert-secondary">
+                      <div class="alert alert-primary">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <strong>Income : Rp {{ number_format($income,0,',','.') }} - Expence : Rp {{ number_format($expense,0,',','.') }}</strong>
