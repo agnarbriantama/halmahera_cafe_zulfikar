@@ -11,7 +11,7 @@ class KasirController extends Controller
 {
     public function index(Request $request)
     {
-        $query = MenuModel::with(['kategori']);
+        $query = MenuModel::with(['kategori','resep.bahan']);
 
         if ($request->filled('search')) {
 
@@ -30,7 +30,25 @@ class KasirController extends Controller
             $query->where('kategori_id', $request->kategori_id);
         }
 
-        $data = $query->latest()->get(); // 🔥 sementara GET dulu biar simpel
+        $data = $query->latest()->paginate(1); // 🔥 sementara GET dulu biar simpel
+
+        foreach ($data as $menu) {
+
+            $menu->stok_habis = false;
+
+            foreach ($menu->resep as $resep) {
+
+                if (
+                    !$resep->bahan ||
+                    ($resep->bahan->jumlah_stok - $resep->jumlah)
+                        < $resep->bahan->minimal_stok
+                ) {
+                    $menu->stok_habis = true;
+                    break;
+                }
+            }
+        }
+        
         $kategori = KategoriModel::all();
 
         return view('kasir3', compact('data', 'kategori'));

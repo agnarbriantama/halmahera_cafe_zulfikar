@@ -38,30 +38,39 @@
                           </tr>
                         </thead>
                         <tbody>                                 
+                          @foreach($bulan as $index => $item)
+
                           <tr>
-                            <td>
-                              1
-                            </td>
-                            <td>01-2026</td>
-                            <td>Rp. 30.000.000</td>
-                            <td>Rp. 20.000.000</td>
-                            <td>Rp. 10.000.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
+                              <td>{{ $index + 1 }}</td>
+
+                              <td>
+                                  {{ \Carbon\Carbon::create()
+                                      ->month($item['bulan'])
+                                      ->translatedFormat('F') }}
+                                  {{ $item['tahun'] }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['income'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['expense'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['laba'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  <a href="{{ route('detail.bulanan',[$item['tahun'], $item['bulan']]) }}" class="btn btn-primary">
+                                      Detail
+                                  </a>
+                              </td>
+
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>02-2026</td>
-                            <td>Rp. 60.000.000</td>
-                            <td>Rp. 40.000.000</td>
-                            <td>Rp. 20.000.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
+
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

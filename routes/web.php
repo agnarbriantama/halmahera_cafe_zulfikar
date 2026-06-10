@@ -41,6 +41,9 @@ Route::middleware(['auth', 'role:owner,admin'])->group(function () {
     Route::get('/laporan-harian', [KeuanganController::class, 'laporan_harian'])->name('harian');
     Route::get('/laporan-mingguan', [KeuanganController::class, 'laporan_mingguan'])->name('mingguan');
     Route::get('/laporan-bulanan', [KeuanganController::class, 'laporan_bulanan'])->name('bulanan');
+    Route::get('/laporan-harian/{tanggal}', [KeuanganController::class, 'detail_harian'])->name('detail.harian');
+    Route::get('/laporan-mingguan/{tahun}/{minggu}', [KeuanganController::class, 'detail_mingguan'])->name('detail.mingguan');
+    Route::get('/laporan-bulanan/{tahun}/{bulan}', [KeuanganController::class, 'detail_bulanan'])->name('detail.bulanan');
 
 });
 

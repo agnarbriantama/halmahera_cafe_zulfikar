@@ -37,43 +37,21 @@
                             <th>Aksi</th>
                           </tr>
                         </thead>
-                        <tbody>                                 
+                        <tbody>
+                          @foreach($laporan as $index => $item)                                 
                           <tr>
                             <td>
-                              1
+                              {{ $index + 1 }}
                             </td>
-                            <td>31-01-2026</td>
-                            <td>Rp. 150.000</td>
-                            <td>Rp. 50.000</td>
-                            <td>Rp. 100.000</td>
+                            <td>{{ \Carbon\Carbon::parse($item['tanggal'])->format('d-m-Y') }}</td>
+                            <td>Rp {{ number_format($item['income'],0,',','.') }}</td>
+                            <td>Rp {{ number_format($item['expense'],0,',','.') }}</td>
+                            <td>Rp {{ number_format($item['laba'],0,',','.') }}</td>
                             <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
+                              <a href="{{route('detail.harian', $item['tanggal'])}}" class="btn btn-primary">Detail</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>01-02-2026</td>
-                            <td>Rp. 500.000</td>
-                            <td>Rp. 250.000</td>
-                            <td>Rp. 250.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              3
-                            </td>
-                            <td>02-02-2026</td>
-                            <td>Rp. 300.000</td>
-                            <td>Rp. 400.000</td>
-                            <td>Rp. -100.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

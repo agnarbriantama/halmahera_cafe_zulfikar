@@ -38,42 +38,36 @@
                           </tr>
                         </thead>
                         <tbody>                                 
+                          @foreach($minggu as $index => $item)
                           <tr>
-                            <td>
-                              1
-                            </td>
-                            <td>11-01-2026 - 17-01-2026</td>
-                            <td>Rp. 2.000.000</td>
-                            <td>Rp. 500.000</td>
-                            <td>Rp. 1.500.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
+                              <td>{{ $index + 1 }}</td>
+
+                              <td>
+                                  {{ $item['start']->format('d-m-Y') }}
+                                  -
+                                  {{ $item['end']->format('d-m-Y') }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['income'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['expense'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  Rp {{ number_format($item['laba'],0,',','.') }}
+                              </td>
+
+                              <td>
+                                  <a href="{{ route('detail.mingguan',[$item['tahun'], $item['minggu']]) }}" class="btn btn-primary">
+                                      Detail
+                                  </a>
+                              </td>
+
                           </tr>
-                          <tr>
-                            <td>
-                              2
-                            </td>
-                            <td>18-01-2026 - 24-01-2026</td>
-                            <td>Rp. 1.500.000</td>
-                            <td>Rp. 700.000</td>
-                            <td>Rp. 800.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              3
-                            </td>
-                            <td>25-01-2026 - 31-01-2026</td>
-                            <td>Rp. 2.500.000</td>
-                            <td>Rp. 1.300.000</td>
-                            <td>Rp. 1.200.000</td>
-                            <td>
-                              <a href="#" class="btn btn-primary">Detail</a>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

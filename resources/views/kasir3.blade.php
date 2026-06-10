@@ -620,7 +620,7 @@
                     <div id="menu-container" class="tab-content">
                         <div id="tab-5" class="tab-pane fade show p-0 active">
                             <div class="row g-4 product">
-                                @foreach ($data as $index => $menu) 
+                                @forelse ($data as $index => $menu) 
                                 <div class="col-lg-4">
                                     <div class="product-item rounded wow fadeInUp" data-wow-delay="0.5s">
                                         <div class="product-item-inner border rounded">
@@ -628,12 +628,21 @@
                                                 <img src="{{asset('electro/img/product-11.png')}}" class="img-fluid w-100 rounded-top"
                                                     alt="">
                                                 <div class="product-details">
+                                                    @if($menu->stok_habis)
+
+                                                    <a href="#"
+                                                    class="btn btn-danger disabled">
+                                                        <i class="fas fa-ban"></i>
+                                                    </a>
+
+                                                    @else
                                                     <a href="#"
                                                     class="btn-add-cart"
                                                     data-id="{{ $menu->id }}"
                                                     data-nama="{{ $menu->nama_menu }}"
                                                     data-kategori="{{ $menu->kategori->nama_kategori }}"
                                                     data-harga="{{ $menu->harga }}"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="text-center rounded-bottom p-4">
@@ -641,6 +650,13 @@
                                                 <a href="#" class="d-block h4">{{ $menu->nama_menu }}</a>
                                                 <!-- <del class="me-2 fs-5">$1,250.00</del> -->
                                                 <span class="text-primary fs-5">Rp {{ number_format($menu->harga, 0, ',', '.') }}</span>
+                                                @if($menu->stok_habis)
+                                                    <div class="mt-2">
+                                                        <span class="badge bg-danger">
+                                                            Stok Habis
+                                                        </span>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <!-- <div
@@ -651,19 +667,41 @@
                                         </div> -->
                                     </div>
                                 </div>
-                                @endforeach
-                                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="pagination d-flex justify-content-center mt-5">
-                                        <a href="#" class="rounded">&laquo;</a>
-                                        <a href="#" class="active rounded">1</a>
-                                        <a href="#" class="rounded">2</a>
-                                        <a href="#" class="rounded">3</a>
-                                        <a href="#" class="rounded">4</a>
-                                        <a href="#" class="rounded">5</a>
-                                        <a href="#" class="rounded">6</a>
-                                        <a href="#" class="rounded">&raquo;</a>
-                                    </div>
+                                @empty
+
+                                <div class="col-12 text-center py-5">
+                                    <i class="fas fa-search fa-3x text-secondary mb-3"></i>
+                                    <h5>Menu tidak ditemukan</h5>
                                 </div>
+
+                                @endforelse
+                                <!-- <div class="col-12 wow fadeInUp" data-wow-delay="0.1s"> -->
+                                    <div class="pagination d-flex justify-content-center mt-5 pagination-container">
+    
+                                        {{-- Previous --}}
+                                        @if ($data->onFirstPage())
+                                            <a class="rounded disabled">&laquo;</a>
+                                        @else
+                                            <a href="{{ $data->previousPageUrl() }}" class="rounded">&laquo;</a>
+                                        @endif
+
+                                        {{-- Number --}}
+                                        @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                                            <a href="{{ $url }}"
+                                            class="rounded {{ $page == $data->currentPage() ? 'active' : '' }}">
+                                                {{ $page }}
+                                            </a>
+                                        @endforeach
+
+                                        {{-- Next --}}
+                                        @if ($data->hasMorePages())
+                                            <a href="{{ $data->nextPageUrl() }}" class="rounded">&raquo;</a>
+                                        @else
+                                            <a class="rounded disabled">&raquo;</a>
+                                        @endif
+
+                                    </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                         <div id="tab-6" class="products tab-pane fade show p-0">
@@ -1208,6 +1246,35 @@
     });
     </script>
     <script>
+        function updateMenu(html) {
+
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(html, 'text/html');
+
+            let newMenu = doc.querySelector('#menu-container');
+
+            if (newMenu) {
+                document.querySelector('#menu-container').innerHTML =
+                    newMenu.innerHTML;
+            }
+        }
+
+        function showLoading() {
+
+            Swal.fire({
+                title: 'Memuat...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+        }
+
+        function hideLoading() {
+            Swal.close();
+        }
+
         const searchInput = document.getElementById('search');
 
         searchInput.addEventListener('input', function () {
@@ -1222,14 +1289,7 @@
             .then(res => res.text())
             .then(html => {
 
-                let parser = new DOMParser();
-                let doc = parser.parseFromString(html, 'text/html');
-
-                let newMenu = doc.querySelector('#menu-container');
-
-                if (newMenu) {
-                    document.querySelector('#menu-container').innerHTML = newMenu.innerHTML;
-                }
+                updateMenu(html);
 
             })
             .catch(error => {
@@ -1240,6 +1300,7 @@
 
         document.getElementById('kategori').addEventListener('change', function () {
 
+            showLoading();
             let kategori = this.value;
             let search = document.getElementById('search').value;
 
@@ -1251,15 +1312,35 @@
             .then(res => res.text())
             .then(html => {
 
-                let parser = new DOMParser();
-                let doc = parser.parseFromString(html, 'text/html');
+                updateMenu(html);
+                hideLoading();
 
-                let newMenu = doc.querySelector('#menu-container');
+            });
 
-                if (newMenu) {
-                    document.querySelector('#menu-container').innerHTML = newMenu.innerHTML;
+        });
+
+        document.addEventListener('click', function(e) {
+
+            const link = e.target.closest('.pagination a');
+
+            if (!link) return;
+
+            e.preventDefault();
+
+            showLoading();
+            let url = link.getAttribute('href');
+
+            if (!url || url === '#') return;
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
-
+            })
+            .then(res => res.text())
+            .then(html => {
+                hideLoading();
+                updateMenu(html);
             });
 
         });
