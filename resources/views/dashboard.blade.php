@@ -233,8 +233,10 @@
                               </table>
                           </div>
                         @else
-                          <div class="alert alert-success mb-0">
-                            Semua stok bahan aman.
+                          <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                            <div class="alert alert-success mb-0">
+                              Semua stok bahan aman.
+                            </div>
                           </div>
                         @endif
                       </div>
@@ -248,7 +250,7 @@
                       <h4>Budget vs Sales</h4>
                     </div>
                     <div class="card-body">
-                      <canvas id="myChart" height="158"></canvas>
+                      <canvas id="myChartdashboard" height="158"></canvas>
                     </div>
                   </div>
                 </div>
@@ -341,5 +343,62 @@
   <!-- Template JS File -->
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/custom.js')}}"></script>
+  <script>
+    var ctx = document.getElementById("myChartdashboard").getContext('2d');
+    
+    const labels = @json($labels);
+    const incomeData = @json($incomeData);
+    const expenseData = @json($expenseData);
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Income',
+          data: incomeData,
+          borderWidth: 2,
+          backgroundColor: 'rgba(63,82,227,.8)',
+          borderColor: 'transparent',
+          borderWidth: 0,
+          pointBackgroundColor: '#999',
+          pointRadius: 4
+        },{
+          label: 'Expence',
+          data: expenseData,
+          borderWidth: 2,
+          backgroundColor: 'rgba(254,86,83,.7)',
+          borderColor: 'rgba(254,86,83,.7)',
+          borderWidth: 2.5,
+          pointBackgroundColor: '#ffffff',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              drawBorder: false,
+              color: '#f2f2f2',
+            },
+            ticks: {
+              beginAtZero: true,
+              callback: function(value) {
+                  return 'Rp ' + value.toLocaleString('id-ID');
+              }
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }]
+        },
+      }
+    });
+  </script>
 </body>
 </html>
