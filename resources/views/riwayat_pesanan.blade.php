@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Electro - Electronics Website Template</title>
+    <title>Neo Haru - Halaman Riwayat Pesan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -156,6 +156,9 @@
                         <div class="navbar-nav ms-auto py-0">
                             <a href="{{route('kasir')}}" class="nav-item nav-link">Menu</a>
                             <a href="{{route('riwayat')}}" class="nav-item nav-link active">Riwayat Pesanan</a>
+                            @if(in_array(auth()->user()->role, ['admin']))
+                            <a href="{{route('dashboard')}}" class="nav-item nav-link">Dashboard</a>
+                            @endif
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">All
                                         Category</span></a>

@@ -71,10 +71,13 @@
             <a href="index.html">HC</a>
           </div>
           <ul class="sidebar-menu">
+            @if(in_array(auth()->user()->role, ['owner', 'admin']))
             <li class="menu-header">Dashboard</li>
             <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
               <a href="{{route('dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
+            @endif
+            @if(in_array(auth()->user()->role, ['admin']))
             <li class="menu-header">Stok Bahan</li>
             <li class="{{ Request::routeIs('bahan') ? 'active' : '' }}">
               <a href="{{route('bahan')}}" class="nav-link"><i class="fas fa-warehouse"></i> <span>Tabel Bahan</span></a>
@@ -94,7 +97,9 @@
             </li>
             <li class="{{ Request::routeIs('menu') ? 'active' : '' }}">
               <a href="{{route('menu')}}" class="nav-link"><i class="fas fa-utensils"></i> <span>Daftar Menu</span></a>
-            </li>           
+            </li> 
+            @endif
+            @if(in_array(auth()->user()->role, ['owner', 'admin']))          
             <li class="menu-header">Keuangan</li>
             <li class="dropdown {{ Request::routeIs('harian', 'mingguan', 'bulanan') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i> <span>Laporan Keuangan</span></a>
@@ -104,6 +109,8 @@
                 <li class="{{ Request::routeIs('bulanan') ? 'active' : '' }}"><a href="{{route('bulanan')}}">Bulanan</a></li> 
               </ul>
             </li>
+            @endif
+            @if(in_array(auth()->user()->role, ['admin']))
             <li class="dropdown {{ Request::routeIs('pengeluaran_bahan', 'pengeluaran_gaji', 'pengeluaran_operasional') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder-minus"></i> <span>Pengeluaran</span></a>
               <ul class="dropdown-menu">
@@ -116,6 +123,7 @@
             <li class="{{ Request::routeIs('kasir') ? 'active' : '' }}">
               <a class="nav-link" href="{{route('kasir')}}"><i class="fas fa-store"></i> <span>Halaman Kasir</span></a>
             </li>
+            @endif
             <li class="menu-header">Logout</li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
           </ul>
@@ -271,11 +279,13 @@
                                   @if($item->menu->foto)
                                       <img class="mr-3 rounded"
                                           width="55"
+                                          height="55"
                                           src="{{ asset('storage/' . $item->menu->foto) }}"
                                           alt="{{ $item->menu->nama_menu }}">
                                   @else
                                       <img class="mr-3 rounded"
                                           width="55"
+                                          height="55"
                                           src="{{ asset('stisla/dist/assets/img/products/product-3-50.png') }}"
                                           alt="{{ $item->menu->nama_menu }}">
                                   @endif

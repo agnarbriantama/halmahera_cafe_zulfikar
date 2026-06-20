@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Electro - Electronics Website Template</title>
+    <title>Neo Haru - Halaman Kasir</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -29,6 +29,13 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('electro/css/style.css')}}" rel="stylesheet">
+    <style>
+        .menu-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -200,6 +207,9 @@
                         <div class="navbar-nav ms-auto py-0">
                             <a href="{{route('kasir')}}" class="nav-item nav-link active">Menu</a>
                             <a href="{{route('riwayat')}}" class="nav-item nav-link">Riwayat Pesanan</a>
+                            @if(in_array(auth()->user()->role, ['admin']))
+                            <a href="{{route('dashboard')}}" class="nav-item nav-link">Dashboard</a>
+                            @endif
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">All
                                         Category</span></a>
@@ -568,7 +578,7 @@
                         </div>
                     </div> -->
                     <div class="row g-4">
-                        <div class="col-xl-7">
+                        <div class="col-xl-8">
                             <!-- <div class="input-group w-100 mx-auto d-flex">
                                 <input type="search" class="form-control p-3" placeholder="keywords"
                                     aria-describedby="search-icon-1">
@@ -602,18 +612,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-xl-2">
+                        <div class="col-lg-4 col-xl-1">
                             <ul class="nav nav-pills d-inline-flex text-center py-2 px-2 rounded bg-light mb-4">
-                                <li class="nav-item me-4">
+                                <li class="nav-item">
                                     <a class="bg-light" data-bs-toggle="pill" href="#tab-5">
                                         <i class="fas fa-th fa-3x text-primary"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="bg-light" data-bs-toggle="pill" href="#tab-6">
                                         <i class="fas fa-bars fa-3x text-primary"></i>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -621,14 +631,25 @@
                         <div id="tab-5" class="tab-pane fade show p-0 active">
                             <div class="row g-4 product">
                                 @forelse ($data as $index => $menu) 
-                                <div class="col-lg-4">
+                                <div class="col-lg-2">
                                     <div class="product-item rounded wow fadeInUp" data-wow-delay="0.5s">
                                         <div class="product-item-inner border rounded">
                                             <div class="product-item-inner-item">
-                                                <img src="{{asset('electro/img/product-11.png')}}" class="img-fluid w-100 rounded-top"
+                                                @if($menu->foto)
+                                                    <img src="{{asset('storage/' . $menu->foto)}}" class="menu-img rounded-top"
                                                     alt="">
+                                                @else
+                                                   <img src="{{asset('electro/img/neo-haru.jpeg')}}" class="menu-img rounded-top"
+                                                    alt="">
+                                                @endif
                                                 <div class="product-details">
-                                                    @if($menu->stok_habis)
+                                                    @if($menu->belum_resep)
+
+                                                    <a href="#"
+                                                    class="btn btn-danger disabled">
+                                                        <i class="fas fa-ban"></i>
+                                                    </a>
+                                                    @elseif($menu->stok_habis)
 
                                                     <a href="#"
                                                     class="btn btn-danger disabled">
@@ -646,11 +667,17 @@
                                                 </div>
                                             </div>
                                             <div class="text-center rounded-bottom p-4">
-                                                <a href="#" class="d-block mb-2">{{ $menu->kategori->nama_kategori }}</a>
-                                                <a href="#" class="d-block h4">{{ $menu->nama_menu }}</a>
+                                                <p class="d-block mb-2 text-primary">{{ $menu->kategori->nama_kategori }}</p>
+                                                <p class="d-block h4">{{ $menu->nama_menu }}</p>
                                                 <!-- <del class="me-2 fs-5">$1,250.00</del> -->
                                                 <span class="text-primary fs-5">Rp {{ number_format($menu->harga, 0, ',', '.') }}</span>
-                                                @if($menu->stok_habis)
+                                                @if($menu->belum_resep)
+                                                    <div class="mt-2">
+                                                        <span class="badge bg-warning">
+                                                            Belum ada resep
+                                                        </span>
+                                                    </div>
+                                                @elseif($menu->stok_habis)
                                                     <div class="mt-2">
                                                         <span class="badge bg-danger">
                                                             Stok Habis
@@ -704,7 +731,7 @@
                                 <!-- </div> -->
                             </div>
                         </div>
-                        <div id="tab-6" class="products tab-pane fade show p-0">
+                        <!-- <div id="tab-6" class="products tab-pane fade show p-0">
                             <div class="row g-4 products-mini">
                                 @foreach ($data as $index => $menu) 
                                 <div class="col-lg-6">
@@ -723,7 +750,6 @@
                                                 <div class="products-mini-content p-3">
                                                     <a href="#" class="d-block mb-2">{{ $menu->kategori->nama_kategori }}</a>
                                                     <a href="#" class="d-block h4">{{ $menu->nama_menu }}</a>
-                                                    <!-- <del class="me-2 fs-5">$1,250.00</del> -->
                                                     <span class="text-primary fs-5">Rp {{ number_format($menu->harga, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
@@ -763,7 +789,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -47,7 +47,7 @@
                             </td>
                             <td>{{ $item->nama_menu }}</td>
                             <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
-                            <td>{{ $item->kategori_id }}</td>
+                            <td>{{ $item->kategori->nama_kategori }}</td>
                             <td>
                               <a href="{{route('menu.detail', $item->id)}}" type="button" class="btn btn-primary">Detail Resep</a>
                               <a type="button" 

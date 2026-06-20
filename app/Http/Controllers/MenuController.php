@@ -13,7 +13,7 @@ class MenuController extends Controller
     public function index()
     {
         $kategori = KategoriModel::latest()->get();
-        $data = MenuModel::latest()->get();
+        $data = MenuModel::with('kategori')->latest()->get();
         return view('menu', compact('data', 'kategori'));
     }
 

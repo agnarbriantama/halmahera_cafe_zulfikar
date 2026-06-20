@@ -30,11 +30,12 @@ class KasirController extends Controller
             $query->where('kategori_id', $request->kategori_id);
         }
 
-        $data = $query->latest()->paginate(1); // 🔥 sementara GET dulu biar simpel
+        $data = $query->latest()->paginate(8); // 🔥 sementara GET dulu biar simpel
 
         foreach ($data as $menu) {
 
             $menu->stok_habis = false;
+            $menu->belum_resep = $menu->resep->isEmpty();
 
             foreach ($menu->resep as $resep) {
 
