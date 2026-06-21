@@ -26,9 +26,16 @@
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
                                     <article class="article article-style-c">
-                                        <div class="article-header">
-                                            <div class="article-image" data-background="{{ asset('storage/' . $menu->foto) }}">
-                                            </div>
+                                        <div class="article-details d-flex justify-content-center align-items-center">
+                                            @if($menu->foto)
+                                                    <img class="mr-3 rounded"
+                                                    width="250"
+                                                    height="250"
+                                                    src="{{ asset('storage/' . $menu->foto) }}"
+                                                    alt="">
+                                            @else
+                                                  <h2 class="text-center">Belum ada foto</h2>
+                                            @endif
                                         </div>
                                     </article>
                                 </div>
