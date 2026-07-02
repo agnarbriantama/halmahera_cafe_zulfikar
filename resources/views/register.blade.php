@@ -89,6 +89,9 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                       Register
                     </button>
+                    <a href="{{route('dashboard')}}" class="btn btn-warning btn-lg btn-block">
+                      Kembali
+                    </a>
                   </div>
                 </form>
               </div>

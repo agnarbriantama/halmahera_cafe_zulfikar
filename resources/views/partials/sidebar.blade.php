@@ -7,13 +7,13 @@
             <a href="index.html">HC</a>
           </div>
           <ul class="sidebar-menu">
-            @if(in_array(auth()->user()->role, ['owner', 'admin']))
+            @if(in_array(auth()->user()->role, ['owner', 'admin', 'superadmin']))
             <li class="menu-header">Dashboard</li>
             <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}">
               <a href="{{route('dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             @endif
-            @if(in_array(auth()->user()->role, ['admin']))
+            @if(in_array(auth()->user()->role, ['admin', 'superadmin']))
             <li class="menu-header">Stok Bahan</li>
             <li class="{{ Request::routeIs('bahan') ? 'active' : '' }}">
               <a href="{{route('bahan')}}" class="nav-link"><i class="fas fa-warehouse"></i> <span>Tabel Bahan</span></a>
@@ -35,7 +35,7 @@
               <a href="{{route('menu')}}" class="nav-link"><i class="fas fa-utensils"></i> <span>Daftar Menu</span></a>
             </li>
             @endif
-            @if(in_array(auth()->user()->role, ['owner', 'admin']))           
+            @if(in_array(auth()->user()->role, ['owner', 'admin', 'superadmin']))           
             <li class="menu-header">Keuangan</li>
             <li class="dropdown {{ Request::routeIs('harian', 'mingguan', 'bulanan') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i> <span>Laporan Keuangan</span></a>
@@ -46,7 +46,7 @@
               </ul>
             </li>
             @endif
-            @if(in_array(auth()->user()->role, ['admin']))
+            @if(in_array(auth()->user()->role, ['admin', 'superadmin']))
             <li class="dropdown {{ Request::routeIs('pengeluaran_bahan', 'pengeluaran_gaji', 'pengeluaran_operasional') ? 'active' : '' }}">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-folder-minus"></i> <span>Pengeluaran</span></a>
               <ul class="dropdown-menu">
@@ -70,8 +70,13 @@
               <a class="nav-link" href="{{route('kasir')}}"><i class="fas fa-store"></i> <span>Halaman Kasir</span></a>
             </li>
             @endif
+            @if(in_array(auth()->user()->role, ['superadmin']))
+            <li class="menu-header">Register</li>
+            <li><a class="nav-link" href="{{route('register')}}"><i class="fas fa-sign-out-alt"></i> <span>Register</span></a></li>
+            @endif
+
             <li class="menu-header">Logout</li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            <li><a class="nav-link" href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
           </ul>
       
         </aside>

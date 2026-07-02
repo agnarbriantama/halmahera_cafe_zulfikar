@@ -28,6 +28,6 @@ class RegisterController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }

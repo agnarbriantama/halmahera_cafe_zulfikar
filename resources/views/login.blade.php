@@ -46,7 +46,7 @@
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Please fill in your email
+                      Email harus di isi
                     </div>
                   </div>
 
@@ -61,7 +61,7 @@
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your password
+                      Password harus di isi
                     </div>
                   </div>
 
@@ -80,9 +80,7 @@
                 </form>
               </div>
             </div>
-            <div class="mt-5 text-muted text-center">
-              Don't have an account? <a href="{{route('register')}}">Create One</a>
-            </div>
+            
             <!-- <div class="simple-footer">
               Copyright &copy; Stisla 2018
             </div> -->

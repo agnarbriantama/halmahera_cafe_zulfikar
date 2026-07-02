@@ -31,10 +31,13 @@ use App\Http\Controllers\TransaksiController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-Route::middleware(['auth', 'role:owner,admin'])->group(function () {
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+});
+
+Route::middleware(['auth', 'role:owner,admin,superadmin'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -47,7 +50,7 @@ Route::middleware(['auth', 'role:owner,admin'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
 
     Route::get('/stok-bahan', [StokBahanController::class, 'index'])->name('bahan');
     Route::post('/stok-bahan', [StokBahanController::class, 'store'])->name('bahan.store');
@@ -96,7 +99,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/laba-rugi', [KeuanganController::class, 'laba_rugi'])->name('laba_rugi');
 
-Route::middleware(['auth', 'role:kasir,admin'])->group(function () {
+Route::middleware(['auth', 'role:kasir,admin,superadmin'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
     Route::get('/riwayat-pesanan', [KasirController::class, 'riwayat'])->name('riwayat');
     Route::get('/transaksi/{id}/detail', [KasirController::class, 'detail'])->name('transaksi.detail');

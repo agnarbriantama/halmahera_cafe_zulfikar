@@ -36,6 +36,10 @@ class LoginController extends Controller
             if ($role == 'owner') {
                 return redirect('/dashboard');
             }
+
+            if ($role == 'superadmin') {
+                return redirect('/dashboard');
+            }
         }
 
         return back()->with('error', 'Email atau password salah');
