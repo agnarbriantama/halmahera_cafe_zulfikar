@@ -40,6 +40,18 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
+                @if(session('error'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+
+                        <strong>Login Gagal!</strong><br>
+                        {{ session('error') }}
+                    </div>
+                </div>
+                @endif
                 <form method="POST" action="/login" class="needs-validation" novalidate="">
                    @csrf
                   <div class="form-group">

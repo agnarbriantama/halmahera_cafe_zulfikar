@@ -125,7 +125,7 @@
             </li>
             @endif
             @if(in_array(auth()->user()->role, ['superadmin']))
-            <li class="menu-header">Register</li>
+            <li class="menu-header">User</li>
             <li><a class="nav-link" href="{{route('register')}}"><i class="fas fa-sign-out-alt"></i> <span>Register</span></a></li>
             @endif
             <li class="menu-header">Logout</li>
@@ -141,6 +141,17 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible show fade">
+                <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+
+                    {{ session('success') }}
+                </div>
+            </div>
+            @endif
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1">

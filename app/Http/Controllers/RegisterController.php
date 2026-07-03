@@ -19,7 +19,12 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required'
-        ]);
+        ],
+        [
+            'email.unique' => 'Email sudah digunakan.',
+            'password.min' => 'Password minimal 6 karakter.',
+        ]
+        );
 
         User::create([
             'name' => $request->name,
@@ -28,6 +33,7 @@ class RegisterController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')
+        ->with('success', 'User berhasil ditambahkan.');
     }
 }

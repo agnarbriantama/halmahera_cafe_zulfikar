@@ -71,7 +71,7 @@
             </li>
             @endif
             @if(in_array(auth()->user()->role, ['superadmin']))
-            <li class="menu-header">Register</li>
+            <li class="menu-header">User</li>
             <li><a class="nav-link" href="{{route('register')}}"><i class="fas fa-sign-out-alt"></i> <span>Register</span></a></li>
             @endif
 
