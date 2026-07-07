@@ -150,7 +150,7 @@
         <div class="row gx-0 bg-primary px-5 align-items-center">
             <div class="col-lg-3 d-none d-lg-block">
                 <nav class="navbar navbar-light position-relative" style="width: 250px;">
-                    <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                    <!-- <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
                         data-bs-toggle="collapse" data-bs-target="#allCat">
                         <h4 class="m-0"><i class="fa fa-bars me-2"></i>All Categories</h4>
                     </button>
@@ -189,14 +189,14 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </nav>
             </div>
             <div class="col-12 col-lg-9">
                 <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
                     <a href="" class="navbar-brand d-block d-lg-none">
-                        <h1 class="display-5 text-secondary m-0"><i
-                                class="fas fa-shopping-bag text-white me-2"></i>Electro</h1>
+                        <h1 class="display-5 text-secondary m-0">
+                            <i class="fas fa-shopping-bag text-white me-2"></i>NEOHARU</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
                     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -210,7 +210,7 @@
                             @if(in_array(auth()->user()->role, ['admin']))
                             <a href="{{route('dashboard')}}" class="nav-item nav-link">Dashboard</a>
                             @endif
-                            <div class="nav-item dropdown d-block d-lg-none mb-3">
+                            <!-- <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link" data-bs-toggle="dropdown"><span class="dropdown-toggle">All
                                         Category</span></a>
                                 <div class="dropdown-menu m-0">
@@ -247,7 +247,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <a href="{{route('logout')}}" class="btn btn-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"><i
                                 class="fa fa-mobile-alt me-2"></i> Logout</a>
@@ -1165,8 +1165,8 @@
         );
 
         // hitung total
-        pajak = subtotal * 0.10;
-        service = subtotal * 0.05;
+        pajak = subtotal * 0.00;
+        service = subtotal * 0.00;
 
         grandTotal = subtotal + pajak + service;
 

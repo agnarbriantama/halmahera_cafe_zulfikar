@@ -229,7 +229,7 @@
 
         </tr>
 
-        <tr>
+        <!-- <tr>
 
             <td>Pajak</td>
 
@@ -251,7 +251,7 @@
 
             </td>
 
-        </tr>
+        </tr> -->
 
     </table>
 
@@ -281,7 +281,7 @@
 
         <br>
 
-        Selamat Menikmati ☕
+        Selamat Menikmati
 
     </div>
 
@@ -396,7 +396,7 @@
 
         </tr>
 
-        <tr>
+        <!-- <tr>
 
             <td>Pajak</td>
 
@@ -418,7 +418,7 @@
 
             </td>
 
-        </tr>
+        </tr> -->
 
     </table>
 
@@ -443,12 +443,15 @@
     <hr>
 
     <div class="footer">
-
-        ❤️ Terima kasih atas kunjungan Anda ❤️
+        Harga diatas sudah termasuk PPN
 
         <br>
 
-        Semoga harimu menyenangkan ☕
+        Terima kasih atas kunjungan Anda
+
+        <br>
+
+        Semoga harimu menyenangkan
 
     </div>
 
